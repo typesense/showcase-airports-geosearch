@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "data:transform": "cd dataset && ./transform.sh"
+    "data:transform": "cd dataset && ./transform.sh",
+    "data:seed": "npm run data:transform && tsx ./dataset/seed.ts"
   },
   "dependencies": {
     "csv-parse": "^5.5.3",
