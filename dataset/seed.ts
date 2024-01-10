@@ -115,7 +115,7 @@ const typesenseAirportsSchema: CollectionCreateSchema = {
 
 const airports: object[] = [];
 const collect = new Writable({
-  write(record: any) {
+  write(record: any, encoding, done) {
     const airport = {
       id: record.id.toString(),
       ident: record.ident.toString(),
@@ -139,6 +139,7 @@ const collect = new Writable({
     };
 
     airports.push(airport);
+    done();
   },
   objectMode: true,
 });
