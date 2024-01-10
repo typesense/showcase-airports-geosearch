@@ -4,11 +4,22 @@ import { createReadStream } from 'node:fs';
 import { resolve } from 'node:path';
 import { Writable } from 'node:stream';
 import { pipeline } from 'node:stream/promises';
+import Typesense from 'typesense';
 import { CollectionCreateSchema } from 'typesense/lib/Typesense/Collections';
 
-import typesense from '@/lib/typesense';
-
 dotenv.config();
+
+const typesense = new Typesense.Client({
+  nodes: [
+    {
+      host: 'localhost',
+      port: 8108,
+      protocol: 'http',
+    },
+  ],
+  apiKey: process.env.TYPESENSE_API_KEY ?? '',
+  connectionTimeoutSeconds: 2,
+});
 
 const typesenseAirportsSchema: CollectionCreateSchema = {
   name: 'airports',
