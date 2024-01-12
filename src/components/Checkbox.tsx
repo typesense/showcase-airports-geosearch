@@ -1,12 +1,13 @@
 import {
-  Root,
-  Indicator,
   CheckboxProps as BaseCheckboxProps,
+  Indicator,
+  Root,
 } from '@radix-ui/react-checkbox';
 import { CheckIcon } from '@radix-ui/react-icons';
+import { ReactNode } from 'react';
 
 interface CheckboxProps extends Omit<BaseCheckboxProps, 'children'> {
-  label: string;
+  label: ReactNode;
   tag?: string;
 }
 
@@ -22,7 +23,7 @@ export default function Checkbox({ label, tag, ...props }: CheckboxProps) {
         </Indicator>
       </Root>
 
-      <span>{label}</span>
+      {label}
       {!!tag && (
         <span className="ml-auto text-xs bg-gray-100 py-1 px-2 rounded-sm">
           {tag}
