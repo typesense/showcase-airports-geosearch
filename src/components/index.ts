@@ -1,3 +1,4 @@
+export { default as AirportMarker } from './AirportMarker';
 export { default as Checkbox } from './Checkbox';
 export * from './Controls';
 export { default as FieldLabel } from './FieldLabel';
