@@ -23,6 +23,7 @@ export function SearchControl() {
       <FieldLabel>Search</FieldLabel>
       <input
         className="px-6 pt-7 pb-3 w-full focus:outline-none"
+        placeholder="Search by airport name, IATA code, GPS code..."
         onChange={(e) => refine(e.target.value)}
       />
     </label>
