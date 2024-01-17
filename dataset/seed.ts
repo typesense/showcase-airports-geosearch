@@ -37,6 +37,7 @@ const typesenseAirportsSchema: CollectionCreateSchema = {
     {
       name: 'type',
       type: 'string',
+      facet: true,
     },
     {
       name: 'name',
@@ -50,6 +51,7 @@ const typesenseAirportsSchema: CollectionCreateSchema = {
     {
       name: 'elevation',
       type: 'float',
+      facet: true,
     },
     {
       name: 'continent',
@@ -71,6 +73,7 @@ const typesenseAirportsSchema: CollectionCreateSchema = {
     {
       name: 'scheduled_service',
       type: 'bool',
+      facet: true,
     },
     {
       name: 'gps_code',
@@ -110,7 +113,12 @@ const typesenseAirportsSchema: CollectionCreateSchema = {
       name: 'region_name',
       type: 'string',
     },
+    {
+      name: 'num_runways',
+      type: 'int32',
+    },
   ],
+  default_sorting_field: 'num_runways',
 };
 
 const airports: object[] = [];
@@ -136,6 +144,7 @@ const collect = new Writable({
       keywords: record.keywords?.toString(),
       country_name: record.country_name,
       region_name: record.region_name,
+      num_runways: Number(record.num_runways),
     };
 
     airports.push(airport);
