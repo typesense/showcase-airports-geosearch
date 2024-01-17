@@ -1,38 +1,31 @@
-import { GoogleMap, useLoadScript } from '@react-google-maps/api';
-import mapStyle from '@/lib/map-style';
+import { InstantSearch } from 'react-instantsearch';
 
-function Map() {
-  return (
-    <GoogleMap
-      mapContainerClassName="w-full h-full"
-      zoom={14}
-      center={{
-        lat: -3.745,
-        lng: -38.523,
-      }}
-      options={{
-        styles: mapStyle,
-        streetViewControl: false,
-        zoomControl: false,
-        fullscreenControl: false,
-        mapTypeControl: false,
-        draggableCursor: 'grab',
-        draggingCursor: 'grabbing',
-      }}
-    ></GoogleMap>
-  );
-}
+import {
+  AirportTypeControl,
+  ElevationControl,
+  Map,
+  ScheduledServiceControl,
+  SearchControl,
+} from '@/components';
+import typesense from '@/lib/typesense';
 
 export default function Home() {
-  const { isLoaded } = useLoadScript({
-    googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY ?? '',
-  });
-
-  if (!isLoaded) return <div>Loading...</div>;
-
   return (
-    <div className="w-screen h-screen">
-      <Map />
-    </div>
+    <InstantSearch searchClient={typesense.searchClient} indexName="airports">
+      <div className="flex flex-col w-screen h-screen">
+        <div className="bg-white drop-shadow relative z-10">
+          <div className="px-6 py-5 border-b">
+            <h1 className="text-2xl font-serif font-black">Airports Search</h1>
+          </div>
+          <div className="grid grid-cols-[1fr,1fr,1fr,auto] divide-x">
+            <SearchControl />
+            <AirportTypeControl />
+            <ElevationControl />
+            <ScheduledServiceControl />
+          </div>
+        </div>
+        <Map />
+      </div>
+    </InstantSearch>
   );
 }
