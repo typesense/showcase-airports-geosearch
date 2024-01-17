@@ -5,7 +5,7 @@ const typesense = new TypesenseInstantsearchAdapter({
     nodes: [
       {
         host: 'localhost',
-        port: 80,
+        port: 8108,
         protocol: 'http',
       },
     ],
@@ -14,7 +14,7 @@ const typesense = new TypesenseInstantsearchAdapter({
   },
   additionalSearchParameters: {
     query_by: 'name,iata_code,ident,gps_code,type',
-    limit: 50,
+    limit: 100,
   },
   geoLocationField: 'location',
 });
