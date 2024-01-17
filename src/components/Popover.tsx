@@ -1,6 +1,6 @@
-import { Transition } from '@headlessui/react';
 import { ChevronDownIcon } from '@radix-ui/react-icons';
 import { Content, Root, Trigger } from '@radix-ui/react-popover';
+import { AnimatePresence, motion } from 'framer-motion';
 import { ReactNode, useState } from 'react';
 import FieldLabel from './FieldLabel';
 
@@ -37,18 +37,21 @@ export default function Popover({
         </button>
       </Trigger>
       <Content align="start" forceMount>
-        <Transition
-          show={open}
-          className="origin-top transition"
-          enterFrom="scale-y-0 opacity-0"
-          enterTo="scale-y-100 opacity-1"
-          leaveFrom="scale-y-100 opacity-1"
-          leaveTo="scale-y-0 opacity-0"
-        >
-          <div className="bg-white w-[var(--radix-popover-trigger-width)] px-6 pt-3 pb-5 flex flex-col gap-5 origin-top rounded-b-sm">
-            {children}
-          </div>
-        </Transition>
+        <AnimatePresence>
+          {open && (
+            <motion.div
+              className="bg-white w-[var(--radix-popover-trigger-width)] px-6 pt-3 pb-5 flex flex-col gap-5 origin-top rounded-b-sm"
+              initial={{
+                scaleY: 0,
+                opacity: 0,
+              }}
+              animate={{ scaleY: 1, opacity: 1 }}
+              exit={{ scaleY: 0, opacity: 0 }}
+            >
+              {children}
+            </motion.div>
+          )}
+        </AnimatePresence>
       </Content>
     </Root>
   );
