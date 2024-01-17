@@ -1,4 +1,5 @@
 import * as Popover from '@radix-ui/react-popover';
+import { motion } from 'framer-motion';
 
 interface AirportMarkerProps {
   name: string;
@@ -31,12 +32,21 @@ export default function AirportMarker({
         <Popover.Content
           sideOffset={4}
           side="top"
-          className="bg-white p-6 rounded-md"
           updatePositionStrategy="always"
+          asChild
         >
-          <Popover.Arrow className="fill-white" />
-          {name}
-          {/* TODO: Render all airport info here */}
+          {isOpen && (
+            <motion.div
+              className="bg-white p-6 rounded-md"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+            >
+              <Popover.Arrow className="fill-white" />
+              {name}
+              {/* TODO: Render all airport info here */}
+            </motion.div>
+          )}
         </Popover.Content>
       </Popover.Portal>
     </Popover.Root>
