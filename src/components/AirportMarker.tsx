@@ -1,5 +1,4 @@
 import * as Popover from '@radix-ui/react-popover';
-import { memo } from 'react';
 
 interface AirportMarkerProps {
   name: string;
@@ -7,7 +6,11 @@ interface AirportMarkerProps {
   onToggle: () => void;
 }
 
-function AirportMarker({ name, isOpen, onToggle }: AirportMarkerProps) {
+export default function AirportMarker({
+  name,
+  isOpen,
+  onToggle,
+}: AirportMarkerProps) {
   return (
     <Popover.Root open={isOpen}>
       <Popover.Trigger onClick={onToggle}>
@@ -39,5 +42,3 @@ function AirportMarker({ name, isOpen, onToggle }: AirportMarkerProps) {
     </Popover.Root>
   );
 }
-
-export default memo(AirportMarker);
