@@ -11,6 +11,7 @@ const config: Config = {
     extend: {
       fontFamily: {
         sans: ['var(--font-inter)', ...theme.fontFamily.sans],
+        serif: ['var(--font-merriweather)', ...theme.fontFamily.serif],
       },
     },
   },
