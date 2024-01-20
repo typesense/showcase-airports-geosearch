@@ -31,7 +31,7 @@ export default function SearchStats() {
   const indexText = indexSize?.toLocaleString() ?? '';
 
   return (
-    <div className="text-xs py-1.5 px-6 text-gray-600">
+    <div className="flex justify-between text-xs py-1.5 px-4 sm:px-6 text-gray-600">
       {`Found ${statsText} ${indexText} in ${processingTimeMS}ms`}
     </div>
   );

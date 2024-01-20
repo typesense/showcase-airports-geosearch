@@ -25,7 +25,7 @@ export function SearchControl() {
       <FieldLabel>Search</FieldLabel>
       <input
         type="search"
-        className="px-6 pt-7 pb-3 w-full focus:outline-none"
+        className="px-4 sm:px-6 pt-7 pb-3 w-full focus:outline-none"
         placeholder="Search by airport name, IATA code, GPS code..."
         onChange={(e) => {
           const value = e.target.value;
@@ -92,7 +92,7 @@ export function ElevationControl() {
 
   return (
     <div
-      className={`relative block px-6 pt-7 pb-3 w-full ${
+      className={`relative block px-4 sm:px-6 pt-7 pb-3 w-full ${
         isDisabled ? 'opacity-50 cursor-not-allowed' : ''
       }`}
     >
@@ -129,7 +129,7 @@ export function ScheduledServiceControl() {
   });
 
   return (
-    <label className="relative block px-6 pt-7 pb-3 flex-shrink-0 w-40">
+    <label className="relative block px-4 sm:px-6 pt-7 pb-3 flex-shrink-0 w-36 sm:w-40">
       <FieldLabel>Scheduled service</FieldLabel>
 
       <Switch
