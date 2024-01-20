@@ -98,7 +98,10 @@ export default function AirportMarker({
             <h3 className="text-lg font-serif leading-snug mr-4">{name}</h3>
 
             <dl className="mt-4 flex flex-col gap-2 text-sm">
-              <Property label="Elevation" value={`${elevation}ft`} />
+              <Property
+                label="Elevation"
+                value={`${elevation.toLocaleString()}ft`}
+              />
               {gps_code && <Property label="GPS code" value={gps_code} />}
               {iata_code && <Property label="IATA code" value={iata_code} />}
               <Property
