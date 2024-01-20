@@ -21,6 +21,8 @@ export default function Home() {
       <InstantSearch searchClient={typesense.searchClient} indexName="airports">
         <div className="flex flex-col w-screen h-screen antialiased">
           <div className="bg-white shadow relative z-10 divide-y">
+            <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-[#1034ba] to-[#f00373]" />
+
             <div className="flex px-4 md:px-6 py-4">
               <div className="flex flex-col md:flex-row md:items-center gap-2 md:gap-4">
                 <h1 className="text-2xl font-serif font-black">
@@ -47,7 +49,7 @@ export default function Home() {
                 <a
                   href="#"
                   target="_blank"
-                  className="btn-secondary px-4 py-2 text-sm"
+                  className="btn-primary px-4 py-2 text-sm"
                 >
                   Source Code
                   <GithubLogo weight="bold" className="w-4 h-4" />
@@ -58,14 +60,14 @@ export default function Home() {
                 <a
                   href="#"
                   target="_blank"
-                  className="text-sm underline text-gray-900 transition-colors hover:text-gray-600"
+                  className="text-sm underline text-gray-900 transition-colors hover:text-[#f00373]"
                 >
                   About
                 </a>
                 <a
                   href="#"
                   target="_blank"
-                  className="text-sm underline text-gray-900 transition-colors hover:text-gray-600"
+                  className="text-sm underline text-gray-900 transition-colors hover:text-[#f00373]"
                 >
                   Source Code
                 </a>
