@@ -1,6 +1,7 @@
 export { default as AirportMarker } from './AirportMarker';
 export * from './Controls';
 export { default as Map } from './Map';
+export { default as SearchStats } from './SearchStats';
 
 export { default as Checkbox } from './ui/Checkbox';
 export { default as FieldLabel } from './ui/FieldLabel';
