@@ -1,3 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.btn-primary {
+  @apply flex items-center justify-center gap-2 rounded bg-gray-900 text-white font-medium transition-colors hover:bg-gray-800;
+}
+
+.btn-secondary {
+  @apply flex items-center justify-center gap-2 rounded bg-gray-200 text-gray-900 font-medium transition-colors hover:bg-gray-300
+}
