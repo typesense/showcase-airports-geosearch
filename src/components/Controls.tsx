@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import {
+  useGeoSearch,
   useRange,
   useRefinementList,
   useSearchBox,
@@ -16,15 +17,22 @@ import {
 } from '@/components';
 
 export function SearchControl() {
+  const { clearMapRefinement } = useGeoSearch();
   const { refine } = useSearchBox();
 
   return (
     <label className="w-full relative block">
       <FieldLabel>Search</FieldLabel>
       <input
+        type="search"
         className="px-6 pt-7 pb-3 w-full focus:outline-none"
         placeholder="Search by airport name, IATA code, GPS code..."
-        onChange={(e) => refine(e.target.value)}
+        onChange={(e) => {
+          const value = e.target.value;
+          // Disable map refinement when user has performed a search
+          clearMapRefinement();
+          refine(value);
+        }}
       />
     </label>
   );

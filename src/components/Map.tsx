@@ -5,8 +5,12 @@ import {
   useGoogleMap,
   useLoadScript,
 } from '@react-google-maps/api';
-import { useState } from 'react';
-import { useGeoSearch, useInstantSearch } from 'react-instantsearch';
+import { useEffect, useState } from 'react';
+import {
+  useGeoSearch,
+  useInstantSearch,
+  useSearchBox,
+} from 'react-instantsearch';
 import { AnimatePresence, motion } from 'framer-motion';
 
 import { AirportMarker } from '@/components';
@@ -16,6 +20,33 @@ function MapResults() {
   const map = useGoogleMap();
   const { results } = useInstantSearch();
   const [markerOpen, setMarkerOpen] = useState<string>();
+  const { query } = useSearchBox();
+
+  const panMapToHit = (hit: any) => {
+    if (!map) return;
+    map.panTo({ lat: hit.location[0], lng: hit.location[1] });
+    map.panBy(0, -150);
+  };
+
+  /**
+   * When user has performed a search using search-box and some results were found,
+   * pan the map to the first result and open the result.
+   */
+  useEffect(() => {
+    if (!results.hits.length || !query || !map) return;
+    const [hit] = results.hits;
+
+    panMapToHit(hit);
+    map.setZoom(10);
+    setMarkerOpen(hit.ident);
+  }, [results, query]);
+
+  // When search-box query is cleared, close whatever result was open
+  useEffect(() => {
+    if (!query) {
+      setMarkerOpen('');
+    }
+  }, [query]);
 
   return (
     <AnimatePresence>
@@ -32,11 +63,7 @@ function MapResults() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            onClick={() => {
-              if (!map) return;
-              map.panTo({ lat: hit.location[0], lng: hit.location[1] });
-              map.panBy(0, -150);
-            }}
+            onClick={() => panMapToHit(hit)}
           >
             <AirportMarker
               isOpen={markerOpen === hit.ident}
@@ -54,11 +81,37 @@ function MapResults() {
 
 export default function Map() {
   const [map, setMap] = useState<google.maps.Map>();
-  const { refine } = useGeoSearch();
+  const { refine, clearMapRefinement } = useGeoSearch();
+  const { query } = useSearchBox();
 
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY ?? '',
   });
+
+  const performMapRefinement = () => {
+    if (!map || query) return;
+    const bounds = map.getBounds();
+    const center = map.getCenter();
+    if (!bounds || !center) return;
+
+    refine({
+      northEast: {
+        lat: bounds.getNorthEast().lat(),
+        lng: bounds.getNorthEast().lng(),
+      },
+      southWest: {
+        lat: bounds.getSouthWest().lat(),
+        lng: bounds.getSouthWest().lng(),
+      },
+    });
+  };
+
+  // When search-box query is cleared, perform map refinement
+  useEffect(() => {
+    if (!query) {
+      performMapRefinement();
+    }
+  }, [query]);
 
   return (
     <AnimatePresence mode="popLayout" initial={false}>
@@ -96,22 +149,7 @@ export default function Map() {
               });
               setMap(map);
             }}
-            onIdle={() => {
-              const bounds = map?.getBounds();
-              const center = map?.getCenter();
-              if (!bounds || !center) return;
-
-              refine({
-                northEast: {
-                  lat: bounds.getNorthEast().lat(),
-                  lng: bounds.getNorthEast().lng(),
-                },
-                southWest: {
-                  lat: bounds.getSouthWest().lat(),
-                  lng: bounds.getSouthWest().lng(),
-                },
-              });
-            }}
+            onIdle={performMapRefinement}
           >
             <MapResults />
           </GoogleMap>
