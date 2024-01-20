@@ -28,6 +28,42 @@ export default [
     ],
   },
   {
+    featureType: 'administrative.country',
+    elementType: 'labels',
+    stylers: [
+      {
+        visibility: 'on',
+      },
+    ],
+  },
+  {
+    featureType: 'administrative.province',
+    elementType: 'labels',
+    stylers: [
+      {
+        visibility: 'simplified',
+      },
+    ],
+  },
+  {
+    featureType: 'administrative.locality',
+    elementType: 'labels',
+    stylers: [
+      {
+        visibility: 'simplified',
+      },
+    ],
+  },
+  {
+    featureType: 'administrative.locality',
+    elementType: 'labels.text.fill',
+    stylers: [
+      {
+        lightness: '43',
+      },
+    ],
+  },
+  {
     featureType: 'transit',
     stylers: [
       {
@@ -309,15 +345,5 @@ export default [
         visibility: 'simplified',
       },
     ],
-  },
-  {
-    featureType: 'road',
-  },
-  {
-    featureType: 'road',
-  },
-  {},
-  {
-    featureType: 'road.highway',
   },
 ] as google.maps.MapTypeStyle[];
