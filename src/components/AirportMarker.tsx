@@ -1,5 +1,6 @@
 import { Airplane, ArrowSquareOut, CaretDown, X } from '@phosphor-icons/react';
 import { motion } from 'framer-motion';
+import { ReactNode } from 'react';
 
 import { useWikipediaThumbnailUrl } from '@/lib/hooks';
 
@@ -30,7 +31,6 @@ function AirportThumbnail({
   wikipedia_link,
 }: Pick<AirportMarkerProps, 'name' | 'wikipedia_link'>) {
   const thumbnailUrl = useWikipediaThumbnailUrl(wikipedia_link);
-
   return (
     thumbnailUrl && (
       <img
@@ -39,6 +39,17 @@ function AirportThumbnail({
         className="w-full max-h-32 object-cover rounded-t-md [mask-image:linear-gradient(to_bottom,white_50%,transparent)]"
       />
     )
+  );
+}
+
+function Property({ label, value }: { label: string; value: ReactNode }) {
+  return (
+    <div className="flex items-center justify-between gap-2">
+      <dt>{label}</dt>
+      <dd className="px-2 py-0.5 bg-gray-100 rounded-sm font-medium">
+        {value}
+      </dd>
+    </div>
   );
 }
 
@@ -60,7 +71,7 @@ export default function AirportMarker({
      * This component is a Popover but does not use @radix-ui/react-popover because it
      * has some flickering issue when used as a map overlay
      */
-    <div className="relative text-base">
+    <div className="relative text-base font-sans">
       <button onClick={onToggle}>
         <Airplane
           className="w-6 h-6 [&_path:first-child]:fill-white [&_path:first-child]:opacity-100"
@@ -84,54 +95,25 @@ export default function AirportMarker({
           <AirportThumbnail name={name} wikipedia_link={wikipedia_link} />
 
           <div className="px-5 py-3">
-            <h3 className="text-lg font-medium leading-snug mr-4">{name}</h3>
+            <h3 className="text-lg font-serif leading-snug mr-4">{name}</h3>
 
             <dl className="mt-4 flex flex-col gap-2 text-sm">
-              <div className="flex items-center justify-between gap-2">
-                <dt>Elevation</dt>
-                <dd className="px-2 py-0.5 bg-gray-100 rounded-sm">
-                  {elevation}ft
-                </dd>
-              </div>
-
-              {gps_code && (
-                <div className="flex items-center justify-between gap-2">
-                  <dt>GPS code</dt>
-                  <dd className="px-2 py-0.5 bg-gray-100 rounded-sm">
-                    {gps_code}
-                  </dd>
-                </div>
+              <Property label="Elevation" value={`${elevation}ft`} />
+              {gps_code && <Property label="GPS code" value={gps_code} />}
+              {iata_code && <Property label="IATA code" value={iata_code} />}
+              <Property
+                label="Airport type"
+                value={
+                  <span className="capitalize">{type.replace(/_/g, ' ')}</span>
+                }
+              />
+              {!!num_runways && (
+                <Property label="Runways" value={num_runways} />
               )}
-
-              {iata_code && (
-                <div className="flex items-center justify-between gap-2">
-                  <dt>IATA code</dt>
-                  <dd className="px-2 py-0.5 bg-gray-100 rounded-sm">
-                    {iata_code}
-                  </dd>
-                </div>
-              )}
-
-              <div className="flex items-center justify-between gap-2">
-                <dt>Airport Type</dt>
-                <dd className="px-2 py-0.5 bg-gray-100 rounded-sm capitalize">
-                  {type.replace(/_/g, ' ')}
-                </dd>
-              </div>
-
-              <div className="flex items-center justify-between gap-2">
-                <dt>Runways</dt>
-                <dd className="px-2 py-0.5 bg-gray-100 rounded-sm">
-                  {num_runways}
-                </dd>
-              </div>
-
-              <div className="flex items-center justify-between gap-2">
-                <dt>Scheduled service</dt>
-                <dd className="px-2 py-0.5 bg-gray-100 rounded-sm capitalize">
-                  {scheduled_service ? 'Yes' : 'No'}
-                </dd>
-              </div>
+              <Property
+                label="Scheduled service"
+                value={scheduled_service ? 'Yes' : 'No'}
+              />
             </dl>
           </div>
 
@@ -141,7 +123,7 @@ export default function AirportMarker({
                 <a
                   href={home_link}
                   target="_blank"
-                  className="w-full py-2 flex items-center justify-center gap-2 rounded bg-gray-900 text-white font-medium text-sm"
+                  className="btn-primary w-full py-2 text-sm"
                 >
                   Home <ArrowSquareOut weight="bold" className="-mt-0.5" />
                 </a>
@@ -151,7 +133,7 @@ export default function AirportMarker({
                 <a
                   href={wikipedia_link}
                   target="_blank"
-                  className="w-full py-2 flex items-center justify-center gap-2 rounded bg-gray-200 text-gray-900 font-medium text-sm"
+                  className="btn-secondary w-full py-2 text-sm"
                 >
                   Wikipedia <ArrowSquareOut weight="bold" className="-mt-0.5" />
                 </a>
