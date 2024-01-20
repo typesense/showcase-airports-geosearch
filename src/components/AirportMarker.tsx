@@ -1,4 +1,4 @@
-import * as Popover from '@radix-ui/react-popover';
+import { Airplane, CaretDown } from '@phosphor-icons/react';
 import { motion } from 'framer-motion';
 
 interface AirportMarkerProps {
@@ -7,48 +7,42 @@ interface AirportMarkerProps {
   onToggle: () => void;
 }
 
+function Arrow() {
+  return (
+    <span className="absolute bottom-0 left-1/2 translate-y-1/2 -translate-x-1/2">
+      <CaretDown weight="fill" className="w-6 h-6 fill-white" />
+    </span>
+  );
+}
 export default function AirportMarker({
   name,
   isOpen,
   onToggle,
 }: AirportMarkerProps) {
   return (
-    <Popover.Root open={isOpen}>
-      <Popover.Trigger onClick={onToggle}>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="w-6 h-6 -rotate-90 fill-white"
-          viewBox="0 0 24 24"
-          stroke-width="1.5"
-          stroke="currentColor"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+    /**
+     * This component is a Popover but does not use @radix-ui/react-popover because it
+     * has some flickering issue when used as a map overlay
+     */
+    <div className="relative text-base">
+      <button onClick={onToggle}>
+        <Airplane
+          className="w-6 h-6 [&_path:first-child]:fill-white [&_path:first-child]:opacity-100"
+          weight="duotone"
+        />
+      </button>
+      {isOpen && (
+        <motion.div
+          className="absolute bottom-full left-1/2 z-10 mb-2 -translate-x-1/2 w-fit-content bg-white p-6 rounded-md drop-shadow"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
         >
-          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-          <path d="M16 10h4a2 2 0 0 1 0 4h-4l-4 7h-3l2 -7h-4l-2 2h-3l2 -4l-2 -4h3l2 2h4l-2 -7h3z" />
-        </svg>
-      </Popover.Trigger>
-      <Popover.Portal>
-        <Popover.Content
-          sideOffset={4}
-          side="top"
-          updatePositionStrategy="always"
-          asChild
-        >
-          {isOpen && (
-            <motion.div
-              className="bg-white p-6 rounded-md"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-            >
-              <Popover.Arrow className="fill-white" />
-              {name}
-              {/* TODO: Render all airport info here */}
-            </motion.div>
-          )}
-        </Popover.Content>
-      </Popover.Portal>
-    </Popover.Root>
+          {name}
+          {/* TODO: Render all airport info here */}
+          <Arrow />
+        </motion.div>
+      )}
+    </div>
   );
 }
