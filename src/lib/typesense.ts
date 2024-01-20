@@ -13,7 +13,7 @@ const typesense = new TypesenseInstantsearchAdapter({
     connectionTimeoutSeconds: 2,
   },
   additionalSearchParameters: {
-    query_by: 'name,iata_code,ident,gps_code,type',
+    query_by: 'name,iata_code,ident,gps_code,country_name,region_name,type',
     limit: 100,
   },
   geoLocationField: 'location',
