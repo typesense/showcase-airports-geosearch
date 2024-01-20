@@ -36,11 +36,11 @@ export default [
     ],
   },
   {
-    featureType: 'transit.station.airport',
+    featureType: 'transit',
     elementType: 'labels',
     stylers: [
       {
-        visibility: 'on',
+        visibility: 'off',
       },
     ],
   },
