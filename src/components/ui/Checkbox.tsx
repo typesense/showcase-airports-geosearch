@@ -3,7 +3,7 @@ import {
   Indicator,
   Root,
 } from '@radix-ui/react-checkbox';
-import { CheckIcon } from '@radix-ui/react-icons';
+import { Check } from '@phosphor-icons/react';
 import { ReactNode } from 'react';
 
 interface CheckboxProps extends Omit<BaseCheckboxProps, 'children'> {
@@ -19,7 +19,7 @@ export default function Checkbox({ label, tag, ...props }: CheckboxProps) {
         {...props}
       >
         <Indicator>
-          <CheckIcon className="w-4 h-4" />
+          <Check className="w-4 h-4" weight="bold" />
         </Indicator>
       </Root>
 

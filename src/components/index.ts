@@ -1,8 +1,9 @@
 export { default as AirportMarker } from './AirportMarker';
-export { default as Checkbox } from './Checkbox';
 export * from './Controls';
-export { default as FieldLabel } from './FieldLabel';
 export { default as Map } from './Map';
-export { default as Popover } from './Popover';
-export * from './RangeSlider';
-export { default as Switch } from './Switch';
+
+export { default as Checkbox } from './ui/Checkbox';
+export { default as FieldLabel } from './ui/FieldLabel';
+export { default as Popover } from './ui/Popover';
+export * from './ui/RangeSlider';
+export { default as Switch } from './ui/Switch';

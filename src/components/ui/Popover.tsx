@@ -1,4 +1,4 @@
-import { ChevronDownIcon } from '@radix-ui/react-icons';
+import { CaretDown } from '@phosphor-icons/react';
 import { Content, Root, Trigger } from '@radix-ui/react-popover';
 import { AnimatePresence, motion } from 'framer-motion';
 import { ReactNode, useState } from 'react';
@@ -32,7 +32,7 @@ export default function Popover({
               open ? 'rotate-180' : 'rotate-0'
             }`}
           >
-            <ChevronDownIcon className="w-5 h-5" />
+            <CaretDown className="w-5 h-5" weight="bold" />
           </div>
         </button>
       </Trigger>
