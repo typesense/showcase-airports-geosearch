@@ -144,7 +144,7 @@ const collect = new Writable({
       keywords: record.keywords?.toString(),
       country_name: record.country_name,
       region_name: record.region_name,
-      num_runways: Number(record.num_runways),
+      num_runways: Number(record.num_runways ?? 0),
     };
 
     airports.push(airport);

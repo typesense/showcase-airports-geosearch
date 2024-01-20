@@ -26,13 +26,12 @@ FROM
     FROM
       regions
   ) AS regions ON airports.iso_region = regions.iso_region
-  INNER JOIN (
+  LEFT JOIN (
     SELECT
       airport_ident AS ident,
       COUNT(*) AS num_runways
     FROM
       runways
-    WHERE closed = 0
     GROUP BY
       ident
   ) AS runways ON airports.ident = runways.ident
