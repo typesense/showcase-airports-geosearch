@@ -1,8 +1,18 @@
-import { Airplane, CaretDown } from '@phosphor-icons/react';
+import { Airplane, ArrowSquareOut, CaretDown, X } from '@phosphor-icons/react';
 import { motion } from 'framer-motion';
+
+import { useWikipediaThumbnailUrl } from '@/lib/hooks';
 
 interface AirportMarkerProps {
   name: string;
+  elevation: number;
+  gps_code: string;
+  iata_code: string;
+  type: string;
+  wikipedia_link: string;
+  home_link: string;
+  num_runways: number;
+  scheduled_service: boolean;
   isOpen: boolean;
   onToggle: () => void;
 }
@@ -14,8 +24,34 @@ function Arrow() {
     </span>
   );
 }
+
+function AirportThumbnail({
+  name,
+  wikipedia_link,
+}: Pick<AirportMarkerProps, 'name' | 'wikipedia_link'>) {
+  const thumbnailUrl = useWikipediaThumbnailUrl(wikipedia_link);
+
+  return (
+    thumbnailUrl && (
+      <img
+        src={thumbnailUrl}
+        alt={name}
+        className="w-full max-h-32 object-cover rounded-t-md [mask-image:linear-gradient(to_bottom,white_50%,transparent)]"
+      />
+    )
+  );
+}
+
 export default function AirportMarker({
   name,
+  elevation,
+  gps_code,
+  iata_code,
+  type,
+  wikipedia_link,
+  home_link,
+  num_runways,
+  scheduled_service,
   isOpen,
   onToggle,
 }: AirportMarkerProps) {
@@ -33,13 +69,96 @@ export default function AirportMarker({
       </button>
       {isOpen && (
         <motion.div
-          className="absolute bottom-full left-1/2 z-10 mb-2 -translate-x-1/2 w-fit-content bg-white p-6 rounded-md drop-shadow"
+          className="absolute bottom-full left-1/2 z-10 mb-2 -translate-x-1/2 w-64 bg-white rounded-md drop-shadow"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
         >
-          {name}
-          {/* TODO: Render all airport info here */}
+          <button
+            className="p-1.5 flex items-center justify-center absolute top-1 right-1.5 z-10 bg-white/40 rounded-sm backdrop-blur-md"
+            onClick={onToggle}
+          >
+            <X weight="bold" className="w-3 h-3" />
+          </button>
+
+          <AirportThumbnail name={name} wikipedia_link={wikipedia_link} />
+
+          <div className="px-5 py-3">
+            <h3 className="text-lg font-medium leading-snug mr-4">{name}</h3>
+
+            <dl className="mt-4 flex flex-col gap-2 text-sm">
+              <div className="flex items-center justify-between gap-2">
+                <dt>Elevation</dt>
+                <dd className="px-2 py-0.5 bg-gray-100 rounded-sm">
+                  {elevation}ft
+                </dd>
+              </div>
+
+              {gps_code && (
+                <div className="flex items-center justify-between gap-2">
+                  <dt>GPS code</dt>
+                  <dd className="px-2 py-0.5 bg-gray-100 rounded-sm">
+                    {gps_code}
+                  </dd>
+                </div>
+              )}
+
+              {iata_code && (
+                <div className="flex items-center justify-between gap-2">
+                  <dt>IATA code</dt>
+                  <dd className="px-2 py-0.5 bg-gray-100 rounded-sm">
+                    {iata_code}
+                  </dd>
+                </div>
+              )}
+
+              <div className="flex items-center justify-between gap-2">
+                <dt>Airport Type</dt>
+                <dd className="px-2 py-0.5 bg-gray-100 rounded-sm capitalize">
+                  {type.replace(/_/g, ' ')}
+                </dd>
+              </div>
+
+              <div className="flex items-center justify-between gap-2">
+                <dt>Runways</dt>
+                <dd className="px-2 py-0.5 bg-gray-100 rounded-sm">
+                  {num_runways}
+                </dd>
+              </div>
+
+              <div className="flex items-center justify-between gap-2">
+                <dt>Scheduled service</dt>
+                <dd className="px-2 py-0.5 bg-gray-100 rounded-sm capitalize">
+                  {scheduled_service ? 'Yes' : 'No'}
+                </dd>
+              </div>
+            </dl>
+          </div>
+
+          {(!!home_link || !!wikipedia_link) && (
+            <div className="flex gap-1 p-3">
+              {home_link && (
+                <a
+                  href={home_link}
+                  target="_blank"
+                  className="w-full py-2 flex items-center justify-center gap-2 rounded bg-gray-900 text-white font-medium text-sm"
+                >
+                  Home <ArrowSquareOut weight="bold" className="-mt-0.5" />
+                </a>
+              )}
+
+              {wikipedia_link && (
+                <a
+                  href={wikipedia_link}
+                  target="_blank"
+                  className="w-full py-2 flex items-center justify-center gap-2 rounded bg-gray-200 text-gray-900 font-medium text-sm"
+                >
+                  Wikipedia <ArrowSquareOut weight="bold" className="-mt-0.5" />
+                </a>
+              )}
+            </div>
+          )}
+
           <Arrow />
         </motion.div>
       )}
