@@ -35,7 +35,7 @@ function MapResults() {
             onClick={() => {
               if (!map) return;
               map.panTo({ lat: hit.location[0], lng: hit.location[1] });
-              map.panBy(0, -100);
+              map.panBy(0, -150);
             }}
           >
             <AirportMarker
