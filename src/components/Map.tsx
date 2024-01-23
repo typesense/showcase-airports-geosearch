@@ -142,10 +142,10 @@ export default function Map() {
               draggingCursor: 'grabbing',
             }}
             onLoad={(map) => {
-              map.setZoom(10);
+              map.setZoom(7);
               map.setCenter({
-                lat: -3.745,
-                lng: -38.523,
+                lat: 35.23,
+                lng: -117.028,
               });
               setMap(map);
             }}
