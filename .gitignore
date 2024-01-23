@@ -37,4 +37,4 @@ next-env.d.ts
 
 typesense-server-data/
 dataset/data.csv
-dataset/source/
+dataset/source/*.csv
