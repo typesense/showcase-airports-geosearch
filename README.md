@@ -5,7 +5,7 @@ This demo showcases Typesense's Geo Search features in a Next.js project.
 ## Pre-requisistes
 
 1. [Node.js 20.x](https://nodejs.org) and npm
-2. [Typesense server](https://typesense.org/docs/guide/install-typesense.html)
+2. [Typesense server](https://typesense.org/docs/guide/install-typesense.html). Can be hosted locally using the `docker-compose.yml` file in the repository, instructions in [Local Setup](#local-setup) section.
 3. sqlite3
 
 ## Local Setup
@@ -16,9 +16,13 @@ This demo showcases Typesense's Geo Search features in a Next.js project.
    ```bash
    npm install
    ```
-3. Copy `.env.example` file and create a `.env` file at the root of the project.
-4. Set the values of required environment variables in the `.env` file that was created.
-5. Edit the Typesense configs in `src/lib/typesense.ts` and `dataset/seed.ts` files to point to the Typesense server.
+3. (Optional) To run a local instance of Typesense server using the `docker-compose.yml` config in this repository, run the following command.
+   ```bash
+   docker compose up -d
+   ```
+   Note: This requires [Docker](https://www.docker.com/get-started/) to be installed on the system.
+4. Copy `.env.example` file and create a `.env` file at the root of the project.
+5. Set the values of required environment variables in the `.env` file that was created.
 6. Download the airports dataset from [https://ourairports.com/data/](https://ourairports.com/data/) in CSV format under `dataset/source` directory.  
    Following CSV files are required:
    - airports.csv
@@ -40,7 +44,7 @@ This demo showcases Typesense's Geo Search features in a Next.js project.
      ```bash
      npm run dev
      ```
-9. Access the application at `localhost:3000`
+9. Access the application at `localhost:3000`.
 
 ## Learn More
 - [Typesense](https://typesense.org) - learn about Typesense.
