@@ -12,9 +12,9 @@ dotenv.config();
 const typesense = new Typesense.Client({
   nodes: [
     {
-      host: 'localhost',
-      port: 8108,
-      protocol: 'http',
+      host: process.env.NEXT_PUBLIC_TYPESENSE_HOST ?? 'localhost',
+      port: Number(process.env.NEXT_PUBLIC_TYPESENSE_PORT ?? 8108),
+      protocol: process.env.NEXT_PUBLIC_TYPESENSE_PROTOCOL ?? 'http',
     },
   ],
   apiKey: process.env.TYPESENSE_API_KEY ?? '',
