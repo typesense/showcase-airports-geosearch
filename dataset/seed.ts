@@ -25,11 +25,6 @@ const typesenseAirportsSchema: CollectionCreateSchema = {
   name: 'airports',
   fields: [
     {
-      name: 'id',
-      type: 'string',
-      index: true,
-    },
-    {
       name: 'ident',
       type: 'string',
       index: true,
@@ -54,23 +49,6 @@ const typesenseAirportsSchema: CollectionCreateSchema = {
       facet: true,
     },
     {
-      name: 'continent',
-      type: 'string',
-    },
-    {
-      name: 'iso_country',
-      type: 'string',
-    },
-    {
-      name: 'iso_region',
-      type: 'string',
-    },
-    {
-      name: 'municipality',
-      type: 'string',
-      optional: true,
-    },
-    {
       name: 'scheduled_service',
       type: 'bool',
       facet: true,
@@ -82,26 +60,6 @@ const typesenseAirportsSchema: CollectionCreateSchema = {
     },
     {
       name: 'iata_code',
-      type: 'string',
-      optional: true,
-    },
-    {
-      name: 'local_code',
-      type: 'string',
-      optional: true,
-    },
-    {
-      name: 'home_link',
-      type: 'string',
-      optional: true,
-    },
-    {
-      name: 'wikipedia_link',
-      type: 'string',
-      optional: true,
-    },
-    {
-      name: 'keywords',
       type: 'string',
       optional: true,
     },
