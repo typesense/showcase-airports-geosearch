@@ -17,7 +17,7 @@ const typesense = new Typesense.Client({
       protocol: process.env.NEXT_PUBLIC_TYPESENSE_PROTOCOL ?? 'http',
     },
   ],
-  apiKey: process.env.TYPESENSE_API_KEY ?? '',
+  apiKey: process.env.TYPESENSE_ADMIN_API_KEY ?? '',
   connectionTimeoutSeconds: 2,
 });
 
