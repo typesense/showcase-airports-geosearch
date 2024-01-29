@@ -18,7 +18,11 @@ export default function Home() {
       <Head>
         <title>Airports Search with Typesense</title>
       </Head>
-      <InstantSearch searchClient={typesense.searchClient} indexName="airports">
+      <InstantSearch
+        searchClient={typesense.searchClient}
+        indexName="airports"
+        routing
+      >
         <div className="flex flex-col w-screen h-screen antialiased">
           <div className="bg-white shadow relative z-10 divide-y">
             <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-[#1034ba] to-[#f00373]" />

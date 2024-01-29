@@ -81,7 +81,7 @@ function MapResults() {
 
 export default function Map() {
   const [map, setMap] = useState<google.maps.Map>();
-  const { refine, clearMapRefinement } = useGeoSearch();
+  const { currentRefinement, refine } = useGeoSearch();
   const { query } = useSearchBox();
 
   const { isLoaded } = useLoadScript({
@@ -142,11 +142,34 @@ export default function Map() {
               draggingCursor: 'grabbing',
             }}
             onLoad={(map) => {
-              map.setZoom(7);
-              map.setCenter({
-                lat: 35.23,
-                lng: -117.028,
-              });
+              /**
+               * When a query is already present during load, do not
+               * move the map's center as it will automatically be moved
+               * to highlight the first result from the search query.
+               */
+              if (!query) {
+                if (currentRefinement) {
+                  // Use bounds from URL if present
+                  const bounds = new google.maps.LatLngBounds(
+                    {
+                      lat: currentRefinement.southWest.lat,
+                      lng: currentRefinement.southWest.lng,
+                    },
+                    {
+                      lat: currentRefinement.northEast.lat,
+                      lng: currentRefinement.northEast.lng,
+                    }
+                  );
+                  map.fitBounds(bounds, 0);
+                } else {
+                  // Default center and zoom
+                  map.setZoom(7);
+                  map.setCenter({
+                    lat: 35.23,
+                    lng: -117.028,
+                  });
+                }
+              }
               setMap(map);
             }}
             onIdle={performMapRefinement}

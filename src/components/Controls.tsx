@@ -18,7 +18,7 @@ import {
 
 export function SearchControl() {
   const { clearMapRefinement } = useGeoSearch();
-  const { refine } = useSearchBox();
+  const { query, refine } = useSearchBox();
 
   return (
     <label className="w-full relative block">
@@ -27,6 +27,7 @@ export function SearchControl() {
         type="search"
         className="px-4 sm:px-6 pt-7 pb-3 w-full focus:outline-none"
         placeholder="Search by airport name, IATA code, GPS code..."
+        defaultValue={query}
         onChange={(e) => {
           const value = e.target.value;
           // Disable map refinement when user has performed a search
@@ -79,7 +80,7 @@ export function AirportTypeControl() {
 }
 
 export function ElevationControl() {
-  const { range, refine } = useRange({
+  const { range, start, refine } = useRange({
     attribute: 'elevation',
   });
   const { min, max } = range;
@@ -87,8 +88,11 @@ export function ElevationControl() {
   const isDisabled = min === max;
 
   useEffect(() => {
-    setValue({ min, max });
-  }, [min, max, setValue]);
+    setValue({
+      min: start[0] === -Infinity ? min : start[0],
+      max: start[1] === Infinity ? max : start[1],
+    });
+  }, [min, max, start, setValue]);
 
   return (
     <div
