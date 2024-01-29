@@ -118,8 +118,10 @@ const collect = new Writable({
   }
 
   // Create the collection
+  console.log('Creating Typesense collection');
   await typesense.collections().create(typesenseAirportsSchema);
 
+  console.log('Reading the dataset from data.csv file');
   /**
    * Read the CSV file, parse it, and collect it.
    * The records can also be created as documents on Typesense in stream,
@@ -131,8 +133,11 @@ const collect = new Writable({
     collect
   );
 
+  console.log('Starting data import in Typesense');
   await typesense
     .collections(typesenseAirportsSchema.name)
     .documents()
     .import(airports);
+
+  console.log('Data import complete ✅');
 })();
