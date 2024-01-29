@@ -35,6 +35,7 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
+.env
 typesense-server-data/
 dataset/data.csv
 dataset/source/*.csv
