@@ -135,7 +135,6 @@ export default function Map() {
             options={{
               styles: mapStyle,
               streetViewControl: false,
-              zoomControl: false,
               fullscreenControl: false,
               mapTypeControl: false,
               draggableCursor: 'grab',
