@@ -1,8 +1,15 @@
-import { Airplane, ArrowSquareOut, CaretDown, X } from '@phosphor-icons/react';
+import {
+  Airplane,
+  ArrowSquareOut,
+  Balloon,
+  CaretDown,
+  X,
+} from '@phosphor-icons/react';
 import { motion } from 'framer-motion';
 import { ReactNode } from 'react';
 
 import { useWikipediaThumbnailUrl } from '@/lib/hooks';
+import { AirplaneOff, Helicopter, SeaBase } from './icons';
 
 interface AirportMarkerProps {
   name: string;
@@ -73,10 +80,26 @@ export default function AirportMarker({
      */
     <div className="relative text-base font-sans">
       <button onClick={onToggle}>
-        <Airplane
-          className="w-6 h-6 [&_path:first-child]:fill-white [&_path:first-child]:opacity-100"
-          weight="duotone"
-        />
+        {type === 'balloonport' ? (
+          <Balloon
+            className="w-6 h-6 [&_path:first-child]:fill-white [&_path:first-child]:opacity-100"
+            weight="duotone"
+          />
+        ) : type === 'heliport' ? (
+          <Helicopter
+            className="w-7 h-7 stroke-black fill-white"
+            strokeWidth="1.2"
+          />
+        ) : type === 'closed' ? (
+          <AirplaneOff className="w-6 h-6" />
+        ) : type === 'seaplane_base' ? (
+          <SeaBase className="w-6 h-6" />
+        ) : (
+          <Airplane
+            className="w-6 h-6 [&_path:first-child]:fill-white [&_path:first-child]:opacity-100"
+            weight="duotone"
+          />
+        )}
       </button>
       {isOpen && (
         <motion.div
