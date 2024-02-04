@@ -6,6 +6,7 @@ import {
   AirportTypeControl,
   ElevationControl,
   Map,
+  RunwaysControl,
   ScheduledServiceControl,
   SearchControl,
   SearchStats,
@@ -77,12 +78,15 @@ export default function Home() {
                 </a>
               </div>
             </div>
-            <div className="grid grid-cols-[1fr,auto] lg:grid-cols-[1fr,1fr,1fr,auto]">
-              <div className="col-span-2 lg:col-auto border-b lg:border-b-0">
+            <div className="grid grid-cols-[1fr,auto] lg:grid-cols-[2fr,2fr,1.5fr,2fr,auto] xl:grid-cols-[2fr,2fr,1fr,2fr,auto]">
+              <div className="border-b lg:border-b-0">
                 <SearchControl />
               </div>
               <div className="order-1 lg:order-none lg:border-l">
                 <AirportTypeControl />
+              </div>
+              <div className="border-b border-l lg:border-b-0">
+                <RunwaysControl />
               </div>
               <div className="order-2 lg:order-none col-span-2 lg:col-auto border-t lg:border-t-0 lg:border-l">
                 <ElevationControl />

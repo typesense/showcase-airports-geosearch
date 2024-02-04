@@ -74,6 +74,7 @@ const typesenseAirportsSchema: CollectionCreateSchema = {
     {
       name: 'num_runways',
       type: 'int32',
+      facet: true,
     },
   ],
   default_sorting_field: 'num_runways',

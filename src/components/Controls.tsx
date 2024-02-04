@@ -27,6 +27,7 @@ export function SearchControl() {
         type="search"
         className="px-4 sm:px-6 pt-7 pb-3 w-full focus:outline-none"
         placeholder="Search by airport name, IATA code, GPS code..."
+        title="Search by airport name, IATA code, GPS code..."
         defaultValue={query}
         onChange={(e) => {
           const value = e.target.value;
@@ -69,6 +70,42 @@ export function AirportTypeControl() {
                 {type.label.replace(/_/g, ' ')}
               </span>
             }
+            tag={type.count.toLocaleString()}
+            checked={type.isRefined}
+            onCheckedChange={() => refine(type.value)}
+          />
+        ))}
+      </Popover>
+    </div>
+  );
+}
+
+export function RunwaysControl() {
+  const { items: types, refine } = useRefinementList({
+    attribute: 'num_runways',
+    sortBy: ['count'],
+  });
+
+  const selectedTypes = types
+    .filter((type) => type.isRefined)
+    .map((type) => type.value);
+  const btnText = selectedTypes.length ? selectedTypes.join(', ') : 'All';
+
+  return (
+    <div className="w-full overflow-hidden">
+      <Popover
+        label="Runways"
+        btnText={
+          <span className="inline-block max-w-[90%] text-ellipsis whitespace-nowrap overflow-x-hidden">
+            {btnText}
+          </span>
+        }
+        isDisabled={types.length === 1}
+      >
+        {types.map((type) => (
+          <Checkbox
+            key={type.value}
+            label={type.label}
             tag={type.count.toLocaleString()}
             checked={type.isRefined}
             onCheckedChange={() => refine(type.value)}
