@@ -13,6 +13,10 @@ import {
 } from '@/components';
 import typesense from '@/lib/typesense';
 
+const ABOUT_LINK =
+  'https://github.com/typesense/showcase-airports-geosearch/blob/main/README.md';
+const SOURCE_LINK = 'https://github.com/typesense/showcase-airports-geosearch';
+
 export default function Home() {
   return (
     <>
@@ -44,7 +48,7 @@ export default function Home() {
 
               <div className="hidden md:flex items-center gap-2 ml-auto">
                 <a
-                  href="#"
+                  href={ABOUT_LINK}
                   target="_blank"
                   className="btn-secondary px-4 py-2 text-sm"
                 >
@@ -52,7 +56,7 @@ export default function Home() {
                   <ArrowSquareOut weight="bold" className="w-4 h-4 -mt-0.5" />
                 </a>
                 <a
-                  href="#"
+                  href={SOURCE_LINK}
                   target="_blank"
                   className="btn-primary px-4 py-2 text-sm"
                 >
@@ -63,14 +67,14 @@ export default function Home() {
 
               <div className="flex md:hidden flex-col justify-center items-end gap-2 ml-auto">
                 <a
-                  href="#"
+                  href={ABOUT_LINK}
                   target="_blank"
                   className="text-sm underline text-gray-900 transition-colors hover:text-[#f00373]"
                 >
                   About
                 </a>
                 <a
-                  href="#"
+                  href={SOURCE_LINK}
                   target="_blank"
                   className="text-sm underline text-gray-900 transition-colors hover:text-[#f00373]"
                 >
