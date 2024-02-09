@@ -33,16 +33,16 @@ export const AirplaneOff = (props: IconProps) => (
     viewBox="0 0 256 256"
     {...props}
   >
-    <g clip-path="url(#a)">
+    <g clipPath="url(#a)">
       <path
         fill="#fff"
         d="M168 200.414a1 1 0 0 0-.293-.707l-15.414-15.414a1 1 0 0 1-.293-.707V153.22a1 1 0 0 1 1.196-.981l77.608 15.522a1 1 0 0 0 1.196-.981v-30.162a.998.998 0 0 0-.553-.894l-62.151-31.076a1 1 0 0 0-1.155.187l-63.848 63.849a.996.996 0 0 0-.293.707v14.195a1 1 0 0 1-.293.707l-15.414 15.414a1.001 1.001 0 0 0-.293.707v30.109a1 1 0 0 0 1.371.928l38.258-15.302a.992.992 0 0 1 .742 0l38.258 15.302a1 1 0 0 0 1.371-.928v-30.109ZM152 86.609c0 .265-.105.52-.293.707L82.993 156.03a1 1 0 0 1-.511.274l-57.286 11.457A1 1 0 0 1 24 166.78v-30.162c0-.379.214-.725.553-.894l78.894-39.448a1 1 0 0 0 .553-.894V48a24.003 24.003 0 0 1 24-24 24.002 24.002 0 0 1 24 24v38.609Z"
       />
       <path
         fill="currentColor"
-        fill-rule="evenodd"
+        fillRule="evenodd"
         d="M205.66 61.66a8.005 8.005 0 0 0-11.32-11.32l-144 144a8.004 8.004 0 1 0 11.32 11.32l144-144Z"
-        clip-rule="evenodd"
+        clipRule="evenodd"
       />
       <path
         fill="currentColor"
@@ -64,12 +64,12 @@ export const SeaBase = (props: IconProps) => (
     viewBox="0 0 256 256"
     {...props}
   >
-    <g clip-path="url(#a)">
+    <g clipPath="url(#a)">
       <path
         stroke="#000"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        stroke-width="16"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="16"
         d="M24 219.802s13.09-10.833 39.273-10.833c26.181 0 39.272 21.666 65.454 21.666 26.182 0 39.273-10.833 39.273-10.833M24 184.366h144"
       />
       <path
@@ -78,9 +78,9 @@ export const SeaBase = (props: IconProps) => (
       />
       <path
         stroke="#000"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        stroke-width="16"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="16"
         d="m88 84.876-29.35-28.51a8 8 0 0 1 2.2-13.3l7.15-2.7 57.53 21.17 54.84-32.75a32 32 0 0 1 41 7.32l18.63 23.9-147.41 88a31.998 31.998 0 0 1-38-4.32l-36.06-35.32a7.998 7.998 0 0 1 2.32-13.19l3.15-1.54 31.79 10.73L88 84.876Z"
       />
     </g>
