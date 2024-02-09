@@ -49,3 +49,7 @@ This demo showcases Typesense's Geo Search features in a Next.js project.
 ## Learn More
 - [Typesense](https://typesense.org) - learn about Typesense.
 - [Next.js](https://nextjs.org/docs) - learn about Next.js.
+
+## License
+This project is licensed under [Apache License 2.0](https://github.com/typesense/showcase-airports-geosearch/blob/master/LICENSE).  
+The airports dataset used is by [ourairports.com](https://ourairports.com) and relased under [Public Domain](https://github.com/davidmegginson/ourairports-data/blob/main/LICENSE).
